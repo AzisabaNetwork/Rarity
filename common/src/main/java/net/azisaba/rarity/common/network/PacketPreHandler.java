@@ -114,9 +114,10 @@ public class PacketPreHandler extends ChannelDuplexHandler {
         if (tag == null) {
             tag = CompoundTag.getInstance(null).constructor();
         }
-        if (tag.hasKeyOfType("Rarity.HadTag", 99) || tag.hasKeyOfType("Rarity.ModifyCount", 99)) {
+        if (tag.hasKeyOfType("Rarity", 10)) {
             return;
         }
+        CompoundTag rarityTag = CompoundTag.getInstance(null).constructor();
         AtomicReference<CompoundTag> displayTag = new AtomicReference<>(tag.getCompound("display"));
         AtomicInteger lines = new AtomicInteger();
         boolean hadDisplayTag = tag.hasKeyOfType("display", 10);
@@ -164,11 +165,12 @@ public class PacketPreHandler extends ChannelDuplexHandler {
             tag.set("display", displayTag.get());
         }
         if (lines.get() >= 1) {
-            tag.setInt("Rarity.ModifyCount", lines.get());
+            rarityTag.setInt("ModifyCount", lines.get());
         }
-        tag.setBoolean("Rarity.HadDisplayTag", hadDisplayTag);
-        tag.setBoolean("Rarity.HadLoreTag", hadLoreTag);
-        tag.setBoolean("Rarity.HadTag", hadTag);
+        rarityTag.setBoolean("HadDisplayTag", hadDisplayTag);
+        rarityTag.setBoolean("HadLoreTag", hadLoreTag);
+        rarityTag.setBoolean("HadTag", hadTag);
+        tag.set("Rarity", rarityTag);
         item.setTag(tag);
     }
 
@@ -176,29 +178,30 @@ public class PacketPreHandler extends ChannelDuplexHandler {
         if (item == null) return;
         CompoundTag tag = item.getTag();
         if (tag == null) return;
-        if (!tag.hasKeyOfType("Rarity.HadTag", 99) || !tag.hasKeyOfType("Rarity.ModifyCount", 99)) {
+        if (!tag.hasKeyOfType("Rarity", 10)) {
             return;
         }
-        boolean hadTag = tag.getBoolean("Rarity.HadTag");
+        CompoundTag rarityTag = tag.getCompound("Rarity");
+        boolean hadTag = rarityTag.getBoolean("HadTag");
         if (!hadTag) {
             item.setTag(null);
             return;
         }
         Runnable removeTags = () -> {
-            tag.remove("Rarity.HadTag");
-            tag.remove("Rarity.HadDisplayTag");
-            tag.remove("Rarity.HadLoreTag");
-            tag.remove("Rarity.ModifyCount");
+            rarityTag.remove("HadTag");
+            rarityTag.remove("HadDisplayTag");
+            rarityTag.remove("HadLoreTag");
+            rarityTag.remove("ModifyCount");
             item.setTag(tag);
         };
-        boolean hadDisplayTag = tag.getBoolean("Rarity.HadDisplayTag");
+        boolean hadDisplayTag = rarityTag.getBoolean("HadDisplayTag");
         if (!hadDisplayTag) {
             tag.remove("display");
             removeTags.run();
             return;
         }
-        boolean hadLoreTag = tag.getBoolean("Rarity.HadLoreTag");
-        int count = tag.getInt("Rarity.ModifyCount");
+        boolean hadLoreTag = rarityTag.getBoolean("HadLoreTag");
+        int count = rarityTag.getInt("ModifyCount");
         CompoundTag displayTag = tag.getCompound("display");
         if (!hadLoreTag) {
             displayTag.remove("Lore");
