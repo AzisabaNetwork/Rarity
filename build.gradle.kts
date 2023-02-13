@@ -6,6 +6,9 @@ plugins {
 }
 
 allprojects {
+    group = "net.azisaba.rarity"
+    version = "1.0.0-SNAPSHOT"
+
     apply {
         plugin("java")
         plugin("java-library")
@@ -40,9 +43,6 @@ allprojects {
             }
         }
     }
-
-    group = "net.azisaba.rarity"
-    version = "1.0.0-SNAPSHOT"
 
     repositories {
         mavenCentral()
