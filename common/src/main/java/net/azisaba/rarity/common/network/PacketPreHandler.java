@@ -188,10 +188,7 @@ public class PacketPreHandler extends ChannelDuplexHandler {
             return;
         }
         Runnable removeTags = () -> {
-            rarityTag.remove("HadTag");
-            rarityTag.remove("HadDisplayTag");
-            rarityTag.remove("HadLoreTag");
-            rarityTag.remove("ModifyCount");
+            tag.remove("Rarity");
             item.setTag(tag);
         };
         boolean hadDisplayTag = rarityTag.getBoolean("HadDisplayTag");
