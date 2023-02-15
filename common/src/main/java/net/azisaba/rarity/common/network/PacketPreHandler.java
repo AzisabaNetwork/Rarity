@@ -13,7 +13,6 @@ import net.azisaba.rarity.api.item.tag.CompoundTag;
 import net.azisaba.rarity.api.item.tag.ListTag;
 import net.azisaba.rarity.api.item.tag.StringTag;
 import net.azisaba.rarity.common.chat.Component;
-import net.azisaba.rarity.common.network.packet.ClientboundEntityEquipment;
 import net.azisaba.rarity.common.network.packet.ClientboundSetSlot;
 import net.azisaba.rarity.common.network.packet.ClientboundWindowItems;
 import net.azisaba.rarity.common.network.packet.ServerboundClickContainerSlot;
@@ -83,14 +82,6 @@ public class PacketPreHandler extends ChannelDuplexHandler {
                             PROCESS_ITEM_PERF_COUNTER.recordEnd();
                         }
                     });
-                }
-            } else if (msg.getClass().getSimpleName().contains("EntityEquipment")) {
-                ClientboundEntityEquipment packet = ClientboundEntityEquipment.getInstance(msg);
-                PROCESS_ITEM_PERF_COUNTER.recordStart();
-                try {
-                    processItemStack(packet.getItem());
-                } finally {
-                    PROCESS_ITEM_PERF_COUNTER.recordEnd();
                 }
             } else if (msg.getClass().getSimpleName().contains("SetSlot")) {
                 ClientboundSetSlot packet = ClientboundSetSlot.getInstance(msg);
