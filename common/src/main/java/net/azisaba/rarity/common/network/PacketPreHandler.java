@@ -84,12 +84,14 @@ public class PacketPreHandler extends ChannelDuplexHandler {
                     });
                 }
             } else if (msg.getClass().getSimpleName().contains("SetSlot")) {
-                ClientboundSetSlot packet = ClientboundSetSlot.getInstance(msg);
-                PROCESS_ITEM_PERF_COUNTER.recordStart();
-                try {
-                    processItemStack(packet.getItem());
-                } finally {
-                    PROCESS_ITEM_PERF_COUNTER.recordEnd();
+                if (player.getOpenInventory().getType() != InventoryType.MERCHANT) {
+                    ClientboundSetSlot packet = ClientboundSetSlot.getInstance(msg);
+                    PROCESS_ITEM_PERF_COUNTER.recordStart();
+                    try {
+                        processItemStack(packet.getItem());
+                    } finally {
+                        PROCESS_ITEM_PERF_COUNTER.recordEnd();
+                    }
                 }
             }
         } catch (Exception e) {
