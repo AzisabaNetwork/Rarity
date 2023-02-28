@@ -47,7 +47,7 @@ allprojects {
     repositories {
         mavenCentral()
         maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/public/") }
-        maven { url = uri("https://repo.acrylicstyle.xyz/repository/maven-public/") }
+        maven { url = uri("https://repo.azisaba.net/repository/maven-public/") }
     }
 
     tasks {
