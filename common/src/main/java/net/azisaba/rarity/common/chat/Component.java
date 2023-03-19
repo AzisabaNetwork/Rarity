@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 public interface Component {
     @NotNull Component STATIC = getInstance(null);
@@ -26,5 +26,5 @@ public interface Component {
     void addSiblingText(@NotNull String text);
 
     @NotNull
-    Component modifyStyle(@NotNull Consumer<ChatModifier> action);
+    Component modifyStyle(@NotNull UnaryOperator<ChatModifier> action);
 }

@@ -32,6 +32,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Build Spigot 1.19.4
+        run: cd build && java -jar BuildTools.jar --rev 1.19.4 && cd ..
       - name: Prepare gradle.properties
         run: |
           mkdir -p $HOME/.gradle
