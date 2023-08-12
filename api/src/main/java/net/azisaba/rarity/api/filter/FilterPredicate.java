@@ -1,6 +1,6 @@
 package net.azisaba.rarity.api.filter;
 
-import net.azisaba.rarity.api.item.ItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

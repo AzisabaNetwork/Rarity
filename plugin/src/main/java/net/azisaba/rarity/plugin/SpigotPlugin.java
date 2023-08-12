@@ -1,13 +1,17 @@
 package net.azisaba.rarity.plugin;
 
+import net.azisaba.loreeditor.api.event.EventBus;
+import net.azisaba.loreeditor.api.event.ItemEvent;
+import net.azisaba.loreeditor.libs.net.kyori.adventure.text.Component;
+import net.azisaba.loreeditor.libs.net.kyori.adventure.text.format.TextDecoration;
+import net.azisaba.loreeditor.libs.net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.azisaba.rarity.api.Rarity;
 import net.azisaba.rarity.api.RarityAPIProvider;
 import net.azisaba.rarity.common.sql.DatabaseConfig;
 import net.azisaba.rarity.common.sql.DatabaseManager;
-import net.azisaba.rarity.common.util.ChannelUtil;
 import net.azisaba.rarity.plugin.command.RarityCommand;
-import net.azisaba.rarity.plugin.listener.PlayerListener;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import xyz.acrylicstyle.util.reflector.Reflector;
@@ -45,21 +49,19 @@ public class SpigotPlugin extends JavaPlugin {
         // register command
         Bukkit.getPluginCommand("rarity").setExecutor(new RarityCommand(this));
 
-        // register event handler
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
-
-        // inject packet pre handler
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            ChannelUtil.INSTANCE.inject(this, player);
-        }
+        EventBus.INSTANCE.register(this, ItemEvent.class, 0, e -> {
+            Rarity rarity = RarityAPIProvider.get().getRarityByItemStack(e.getBukkitItem());
+            if (rarity == null) {
+                return;
+            }
+            String displayName = ChatColor.translateAlternateColorCodes('&', rarity.getDisplayName(e.getPlayer()));
+            e.addLore(Component.space());
+            e.addLore(LegacyComponentSerializer.legacySection().deserialize(displayName).decoration(TextDecoration.ITALIC, false));
+        });
     }
 
     @Override
     public void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            ChannelUtil.INSTANCE.eject(player);
-        }
-
         if (databaseManager != null) {
             databaseManager.close();
         }

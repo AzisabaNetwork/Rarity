@@ -1,7 +1,7 @@
 package net.azisaba.rarity.plugin.commands;
 
 import net.azisaba.rarity.api.RarityCondition;
-import net.azisaba.rarity.common.util.ChatUtil;
+import net.azisaba.loreeditor.common.util.ChatUtil;
 import net.azisaba.rarity.plugin.SpigotPlugin;
 import net.azisaba.rarity.plugin.command.Command;
 import org.bukkit.ChatColor;

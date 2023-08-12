@@ -2,6 +2,8 @@ name: Rarity
 main: net.azisaba.rarity.plugin.SpigotPlugin
 version: @version@
 api-version: 1.13
+depend:
+  - LoreEditor
 commands:
   rarity:
     permission: rarity.command.rarity

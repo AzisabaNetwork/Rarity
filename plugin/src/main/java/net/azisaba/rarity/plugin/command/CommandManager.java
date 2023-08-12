@@ -13,7 +13,6 @@ import net.azisaba.rarity.plugin.commands.CommandInfo;
 import net.azisaba.rarity.plugin.commands.CommandListConditions;
 import net.azisaba.rarity.plugin.commands.CommandRefresh;
 import net.azisaba.rarity.plugin.commands.CommandDeleteCondition;
-import net.azisaba.rarity.plugin.commands.CommandStats;
 import net.azisaba.rarity.plugin.commands.CommandTest;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -59,6 +58,5 @@ public final class CommandManager {
         registerCommand(new CommandDeleteCondition(plugin));
         registerCommand(new CommandAddTranslation(plugin));
         registerCommand(new CommandHash());
-        registerCommand(new CommandStats());
     }
 }

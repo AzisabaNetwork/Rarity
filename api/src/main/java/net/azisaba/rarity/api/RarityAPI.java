@@ -1,7 +1,7 @@
 package net.azisaba.rarity.api;
 
-import net.azisaba.rarity.api.item.CraftItemStack;
-import net.azisaba.rarity.api.item.ItemStack;
+import net.azisaba.loreeditor.api.item.CraftItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,14 +13,6 @@ import java.util.Objects;
  * You can get the instance of this interface by {@link RarityAPIProvider#get()}.
  */
 public interface RarityAPI {
-    /**
-     * Creates the proxied instance of the specified class.
-     * @param relativeClassName The class to create the proxy. The class must have static getInstance(Object) method.
-     * @param o The instance of the class. If you want to create a proxy of static class, you can pass null.
-     * @return the proxy instance
-     */
-    @NotNull Object getImplInstance(@NotNull String relativeClassName, @Nullable Object o);
-
     /**
      * Gets the rarity by the id.
      * @param id the id of the rarity

@@ -1,15 +1,10 @@
 package net.azisaba.rarity.plugin;
 
-import net.azisaba.rarity.api.Rarity;
-import net.azisaba.rarity.api.RarityAPI;
-import net.azisaba.rarity.api.RarityCondition;
-import net.azisaba.rarity.api.RarityKey;
-import net.azisaba.rarity.api.RarityTranslation;
+import net.azisaba.loreeditor.api.item.CraftItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
+import net.azisaba.rarity.api.*;
 import net.azisaba.rarity.api.filter.FilterParser;
 import net.azisaba.rarity.api.filter.FilterPredicate;
-import net.azisaba.rarity.api.item.CraftItemStack;
-import net.azisaba.rarity.api.item.ItemStack;
-import net.azisaba.rarity.common.util.ReflectionUtil;
 import org.intellij.lang.annotations.Subst;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,12 +12,7 @@ import xyz.acrylicstyle.util.StringReader;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SpigotRarityAPI implements RarityAPI {
@@ -34,11 +24,6 @@ public class SpigotRarityAPI implements RarityAPI {
 
     public SpigotRarityAPI(@NotNull SpigotPlugin plugin) {
         this.plugin = plugin;
-    }
-
-    @Override
-    public @NotNull Object getImplInstance(@NotNull String relativeClassName, @Nullable Object o) {
-        return ReflectionUtil.getImplInstance(relativeClassName, o);
     }
 
     @Override

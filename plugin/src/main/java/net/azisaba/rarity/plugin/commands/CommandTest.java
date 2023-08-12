@@ -1,7 +1,7 @@
 package net.azisaba.rarity.plugin.commands;
 
-import net.azisaba.rarity.api.item.CraftItemStack;
-import net.azisaba.rarity.api.item.ItemStack;
+import net.azisaba.loreeditor.api.item.CraftItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
 import net.azisaba.rarity.api.filter.FilterParser;
 import net.azisaba.rarity.plugin.command.Command;
 import org.bukkit.ChatColor;

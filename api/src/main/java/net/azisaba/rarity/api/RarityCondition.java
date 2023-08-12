@@ -1,7 +1,7 @@
 package net.azisaba.rarity.api;
 
 import net.azisaba.rarity.api.filter.FilterPredicate;
-import net.azisaba.rarity.api.item.ItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,9 +1,9 @@
 package net.azisaba.rarity.api.filter;
 
-import net.azisaba.rarity.api.item.CraftItemStack;
-import net.azisaba.rarity.api.item.ItemStack;
-import net.azisaba.rarity.api.item.tag.CompoundTag;
-import net.azisaba.rarity.api.item.tag.Tag;
+import net.azisaba.loreeditor.api.item.CraftItemStack;
+import net.azisaba.loreeditor.api.item.ItemStack;
+import net.azisaba.loreeditor.api.item.tag.CompoundTag;
+import net.azisaba.loreeditor.api.item.tag.Tag;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 import xyz.acrylicstyle.util.InvalidArgumentException;
