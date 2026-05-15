@@ -2,7 +2,7 @@ plugins {
     java
     `java-library`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.gradleup.shadow") version "9.4.1"
 }
 
 allprojects {
@@ -13,11 +13,11 @@ allprojects {
         plugin("java")
         plugin("java-library")
         plugin("maven-publish")
-        plugin("com.github.johnrengelman.shadow")
+        plugin("com.gradleup.shadow")
     }
 
     java {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+        toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
         withSourcesJar()
         withJavadocJar()
@@ -28,12 +28,16 @@ allprojects {
             maven {
                 name = "repo"
                 credentials(PasswordCredentials::class)
-                url = uri(
-                    if (project.version.toString().endsWith("SNAPSHOT"))
-                        project.findProperty("deploySnapshotURL") ?: System.getProperty("deploySnapshotURL", "https://repo.azisaba.net/repository/maven-snapshots/")
-                    else
-                        project.findProperty("deployReleasesURL") ?: System.getProperty("deployReleasesURL", "https://repo.azisaba.net/repository/maven-releases/")
-                )
+                url =
+                    uri(
+                        if (project.version.toString().endsWith("SNAPSHOT")) {
+                            project.findProperty("deploySnapshotURL")
+                                ?: System.getProperty("deploySnapshotURL", "https://repo.azisaba.net/repository/maven-snapshots/")
+                        } else {
+                            project.findProperty("deployReleasesURL")
+                                ?: System.getProperty("deployReleasesURL", "https://repo.azisaba.net/repository/maven-releases/")
+                        },
+                    )
             }
         }
 
